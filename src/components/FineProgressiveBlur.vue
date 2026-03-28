@@ -178,7 +178,7 @@ const layers = computed(() => {
 </script>
 
 <template>
-  <div class="relative w-full" aria-hidden>
+  <div class="relative w-full" aria-hidden="true">
     <div
       v-if="layers.flagtop"
       class="left-0 w-full z-50 pointer-events-none"

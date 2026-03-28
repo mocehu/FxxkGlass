@@ -212,6 +212,22 @@ const glassHoleItems: { key: keyof typeof settings.value; label: string; descrip
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
+@media (max-width: 480px) {
+  .settings-wrapper {
+    right: clamp(60px, 3vw, 72px);
+  }
+  
+  .settings-panel {
+    top: auto;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    max-height: 70vh;
+    border-radius: 16px 16px 0 0;
+  }
+}
+
 .panel-header {
   padding: 16px 20px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);

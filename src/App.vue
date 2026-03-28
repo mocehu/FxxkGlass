@@ -24,7 +24,7 @@ const {theme, toggleTheme} = useTheme()
 
       <div class="glass-demo">
         <div class="demo-header">
-          <GlassHole text="Glassmorphic UI"/>
+          <GlassHole text="FxxkGlass" :max-width="340"/>
           <p class="subtitle">IOS风格通透的玻璃卡片组件</p>
         </div>
 
@@ -64,7 +64,7 @@ const {theme, toggleTheme} = useTheme()
 .page-content {
   min-height: 100vh;
   width: 100%;
-  padding-top: 100px;
+  padding-top: clamp(70px, 10vw, 100px);
   background: url('https://picsum.photos/1920/1080?random=1') center/cover no-repeat fixed;
   position: relative;
 }
@@ -91,18 +91,18 @@ const {theme, toggleTheme} = useTheme()
 
 .demo-header {
   text-align: center;
-  padding: 20px;
+  padding: clamp(12px, 3vw, 20px);
   color: white;
 }
 
 .demo-header h1 {
-  font-size: clamp(24px, 4vw, 36px);
+  font-size: clamp(20px, 4vw, 36px);
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .subtitle {
-  font-size: clamp(14px, 2vw, 16px);
+  font-size: clamp(12px, 2vw, 16px);
   opacity: 0.8;
 }
 
@@ -110,31 +110,43 @@ const {theme, toggleTheme} = useTheme()
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 40px;
+  padding-bottom: clamp(20px, 4vw, 40px);
 }
 
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-  gap: clamp(16px, 4vw, 40px);
-  padding: clamp(20px, 5vw, 60px);
+  gap: clamp(12px, 3vw, 40px);
+  padding: clamp(12px, 3vw, 60px);
   width: 100%;
   max-width: 1400px;
   box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
+  .page-content {
+    padding-top: 80px;
+  }
+  
   .grid-container {
     grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
-    gap: clamp(12px, 3vw, 24px);
+    gap: clamp(10px, 3vw, 24px);
   }
 }
 
 @media (max-width: 480px) {
+  .page-content {
+    padding-top: 70px;
+  }
+  
   .grid-container {
     grid-template-columns: 1fr;
-    padding: 16px;
-    gap: 16px;
+    padding: 12px;
+    gap: 12px;
+  }
+  
+  .demo-header {
+    padding: 10px;
   }
 }
 

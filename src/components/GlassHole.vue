@@ -13,6 +13,7 @@ const props = defineProps({
   fontWeight: { type: [String, Number], default: 700 },
   letterSpacing: { type: Number, default: 4 },
   padding: { type: Number, default: 20 },
+  maxWidth: { type: Number, default: 0 },
 })
 
 const settings = getMaterialSettings()
@@ -38,23 +39,32 @@ const blurStyle = computed(() => ({
   WebkitMaskRepeat: "no-repeat",
 }))
 
-const textStyle = computed(() => ({
-  fontSize: props.fontSize + "px",
-  fontWeight: String(props.fontWeight),
-  letterSpacing: props.letterSpacing + "px",
-}))
-
 let observer: ResizeObserver | null = null
+let scale = ref(1)
+
+const textStyle = computed(() => ({
+  fontSize: (props.fontSize * scale.value) + "px",
+  fontWeight: String(props.fontWeight),
+  letterSpacing: (props.letterSpacing * scale.value) + "px",
+}))
 
 const updateDimensions = async () => {
   await nextTick()
   
   if (props.mode === 'text' && textRef.value) {
     const bbox = textRef.value.getBBox()
-    dimensions.value = {
-      width: Math.ceil(bbox.width + props.padding * 2),
-      height: Math.ceil(bbox.height + props.padding * 2)
+    let width = Math.ceil(bbox.width + props.padding * 2)
+    let height = Math.ceil(bbox.height + props.padding * 2)
+    
+    if (props.maxWidth > 0 && width > props.maxWidth) {
+      scale.value = props.maxWidth / width
+      width = props.maxWidth
+      height = Math.ceil(height * scale.value)
+    } else {
+      scale.value = 1
     }
+    
+    dimensions.value = { width, height }
   } else if (props.mode === 'custom' && slotRef.value) {
     const rect = slotRef.value.getBoundingClientRect()
     dimensions.value = {
@@ -79,6 +89,7 @@ onUnmounted(() => {
 
 watch(() => props.text, updateDimensions)
 watch(() => props.fontSize, updateDimensions)
+watch(() => props.maxWidth, updateDimensions)
 </script>
 
 <template>
@@ -139,6 +150,7 @@ watch(() => props.fontSize, updateDimensions)
 .glass-hole {
   position: relative;
   display: inline-block;
+  max-width: 100%;
 }
 
 .glass-svg {

@@ -4,7 +4,7 @@
 
 一套接近 iOS 风格毛玻璃（非ios26的液态玻璃） UI 组件，支持渐进式模糊、平滑圆角和混色效果。
 
-通透、柔和、精致
+**通透、柔和、精致**
 
 [![Vue](https://img.shields.io/badge/Vue-3.5-42b883?logo=vue.js)](https://vuejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?logo=typescript)](https://www.typescriptlang.org/)
